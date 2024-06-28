@@ -11,7 +11,8 @@ import {UserController, PostController} from './controllers/index.js';
 
 
 mongoose
-    .connect('mongodb+srv://admin:wwwwww@cluster0.6gooxpw.mongodb.net/portfolio?retryWrites=true&w=majority&appName=Cluster0')
+    .connect(process.env.MONGODB_URI)
+    // mongodb+srv://admin:wwwwww@cluster0.6gooxpw.mongodb.net/portfolio?retryWrites=true&w=majority&appName=Cluster0
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err));
 
@@ -56,7 +57,7 @@ app.patch('/posts/:id',checkAuth, postCreateValidation,  PostController.update);
 
 
 
-app.listen(4444, (err) =>{
+app.listen(process.env.PORT || 4444, (err) =>{
     if (err) {
         return console.log(err);
     }
